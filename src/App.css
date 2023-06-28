@@ -1,0 +1,31 @@
+
+#searchButton{
+  height: 40px;
+  width: 200px;
+  border-radius: 10px;
+  margin-left: 30px;
+}
+
+#inputbox{
+  height: 30px;
+  width: 200px;
+  border-radius: 10px;
+}
+
+
+
+#but1{
+
+  border: solid ;
+  height: 200px;
+  width: 200px;
+}
+#but2{
+  border: solid ;
+}
+body {
+  background-color: #e5e5e5;
+  
+}
+
+

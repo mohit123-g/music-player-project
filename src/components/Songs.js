@@ -1,252 +1,108 @@
 import "../App.css";
 import { useState } from "react";
 import Player from "./Player";
+
 const Songs = (props) => {
-  const [SearchSong, setSearchSong] = useState(-1);
+  const [SearchSong, setSearchSong] = useState([0]);
+  const [searchs, setSearch] = useState("");
+  const [so, setSo] = useState([]);
+  var input_box= document.getElementById('inputbox')
   const searchSongs = () => {
-    var search = props.search;
+    
+    var search =searchs;
     var flag = 0;
+   if(search!=""){
+    var arr=[]
     for (let i = 0; i < props.songs.length; i++) {
-      if (props.songs[i].name === search) {
-        setSearchSong(i + 1);
+     var  j=search.length
+      if (props.songs[i].name.slice(0,j).toLowerCase() === search.toLowerCase()) {
+        // setSearchSong(i);
+        arr.push(i)
         flag = 1;
+        // document.getElementById('GO').disabled=false;
       }
-    }
+    }setSo(arr) 
+  }
+    else{
+      alert("search box is empty") 
+            flag=1;
+        }
+  
     if (flag < 1) {
-      alert("Song is not found");
+      alert("Song Not Found");
     }
   };
 
+    const buttons=()=>{
+     const button=[];//array of buttons
+      for(let i=0;i<30;i++){
+           button.push( //pushing butt  
+           <a href={"player/"+i}>
+          <img
+            id="but1"
+            src={props.songs[i].img}
+            alt={props.songs[i].name}
+          />
+        </a> )
+      }
+      return button;
+     }
+
+     const buttons1=()=>{
+      const button=[];//array of buttons
+       for(let i=0;i<so.length;i++){
+            button.push( //pushing butt  
+            <a href={"player/"+so[i]}>
+           <img
+             id="but1"
+             src={props.songs[so[i]].img}
+           />
+         </a> )
+       }
+       return button;
+      }
+    // useEffect(()=>{console.log("I Only run once (When the component gets mounted)") },[]);
+
+
   return (
-    <div className="song">
-		
-      <h1>
+    <div className="App">
+
+       <h1>
         <input
           id="inputbox"
           placeholder="Enter song name"
           onChange={(event) => {
-            props.setSearch(event.target.value);
+            setSearch(event.target.value);
+            setSo([])
           }}
         />
-        <a href={"player" + SearchSong}>
+         
+         {/* <a href={"player/" + SearchSong}> */}
           <button id="searchButton" onClick={searchSongs}>
             Search
           </button>
-        </a>
-
+          {/* </a> */}
+ 
+          {/* <button  onClick={()=>{setSo(input_box.value)}}  >
+          Go
+          </button> */}
+         
         <br></br>
+        <div>{buttons1()}</div>
+
+        {/* <a href={"player/" + SearchSong}>
+          <button id="GO" onClick={searchSongs} value="Togglee" disabled='true' >
+          Song is present click me to Go
+          </button>
+        </a> */}
         <br></br>
-        <a href="player1">
-          <img
-            id="but1"
-            src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/ba/29/5c/img-worlds-of-adventure.jpg?w=1200&h=-1&s=1/20/20"
-          />
-        </a>
-
-        <a href="player2">
-          <img
-            id="but1"
-            src="https://static.vecteezy.com/system/resources/thumbnails/008/777/617/small/music-man-gamer-line-pop-art-potrait-logo-colorful-design-with-dark-background-abstract-illustration-isolated-black-background-for-t-shirt-poster-clothing-merch-apparel-badge-design-vector.jpg"
-          />
-        </a>
-
-        <a href="player3">
-          <img
-            id="but1"
-            src="https://static.vecteezy.com/system/resources/thumbnails/008/777/617/small/music-man-gamer-line-pop-art-potrait-logo-colorful-design-with-dark-background-abstract-illustration-isolated-black-background-for-t-shirt-poster-clothing-merch-apparel-badge-design-vector.jpg"
-          />
-        </a>
-
-        <a href="player4">
-          <img
-            id="but1"
-            src="https://static.vecteezy.com/system/resources/thumbnails/008/777/617/small/music-man-gamer-line-pop-art-potrait-logo-colorful-design-with-dark-background-abstract-illustration-isolated-black-background-for-t-shirt-poster-clothing-merch-apparel-badge-design-vector.jpg"
-          />
-        </a>
-
-        <a href="player5">
-          <img
-            id="but1"
-            src="https://static.vecteezy.com/system/resources/thumbnails/008/777/617/small/music-man-gamer-line-pop-art-potrait-logo-colorful-design-with-dark-background-abstract-illustration-isolated-black-background-for-t-shirt-poster-clothing-merch-apparel-badge-design-vector.jpg"
-          />
-        </a>
-
-        <a href="player6">
-          <img
-            id="but1"
-            src="https://static.vecteezy.com/system/resources/thumbnails/008/777/617/small/music-man-gamer-line-pop-art-potrait-logo-colorful-design-with-dark-background-abstract-illustration-isolated-black-background-for-t-shirt-poster-clothing-merch-apparel-badge-design-vector.jpg"
-          />
-        </a>
-
-        <a href="player7">
-          <img
-            id="but1"
-            src="https://static.vecteezy.com/system/resources/thumbnails/008/777/617/small/music-man-gamer-line-pop-art-potrait-logo-colorful-design-with-dark-background-abstract-illustration-isolated-black-background-for-t-shirt-poster-clothing-merch-apparel-badge-design-vector.jpg"
-          />
-        </a>
-
-        <a href="player8">
-          <img
-            id="but1"
-            src="https://static.vecteezy.com/system/resources/thumbnails/008/777/617/small/music-man-gamer-line-pop-art-potrait-logo-colorful-design-with-dark-background-abstract-illustration-isolated-black-background-for-t-shirt-poster-clothing-merch-apparel-badge-design-vector.jpg"
-          />
-        </a>
-
-        <a href="player9">
-          <img
-            id="but1"
-            src="https://static.vecteezy.com/system/resources/thumbnails/008/777/617/small/music-man-gamer-line-pop-art-potrait-logo-colorful-design-with-dark-background-abstract-illustration-isolated-black-background-for-t-shirt-poster-clothing-merch-apparel-badge-design-vector.jpg"
-          />
-        </a>
-
-        <a href="player10">
-          <img
-            id="but1"
-            src="https://static.vecteezy.com/system/resources/thumbnails/008/777/617/small/music-man-gamer-line-pop-art-potrait-logo-colorful-design-with-dark-background-abstract-illustration-isolated-black-background-for-t-shirt-poster-clothing-merch-apparel-badge-design-vector.jpg"
-          />
-        </a>
-
-        <a href="player11">
-          <img
-            id="but1"
-            src="https://static.vecteezy.com/system/resources/thumbnails/008/777/617/small/music-man-gamer-line-pop-art-potrait-logo-colorful-design-with-dark-background-abstract-illustration-isolated-black-background-for-t-shirt-poster-clothing-merch-apparel-badge-design-vector.jpg"
-          />
-        </a>
-
-        <a href="player12">
-          <img
-            id="but1"
-            src="https://static.vecteezy.com/system/resources/thumbnails/008/777/617/small/music-man-gamer-line-pop-art-potrait-logo-colorful-design-with-dark-background-abstract-illustration-isolated-black-background-for-t-shirt-poster-clothing-merch-apparel-badge-design-vector.jpg"
-          />
-        </a>
-
-        <a href="player13">
-          <img
-            id="but1"
-            src="https://static.vecteezy.com/system/resources/thumbnails/008/777/617/small/music-man-gamer-line-pop-art-potrait-logo-colorful-design-with-dark-background-abstract-illustration-isolated-black-background-for-t-shirt-poster-clothing-merch-apparel-badge-design-vector.jpg"
-          />
-        </a>
-
-        <a href="player14">
-          <img
-            id="but1"
-            src="https://static.vecteezy.com/system/resources/thumbnails/008/777/617/small/music-man-gamer-line-pop-art-potrait-logo-colorful-design-with-dark-background-abstract-illustration-isolated-black-background-for-t-shirt-poster-clothing-merch-apparel-badge-design-vector.jpg"
-          />
-        </a>
-
-        <a href="player15">
-          <img
-            id="but1"
-            src="https://static.vecteezy.com/system/resources/thumbnails/008/777/617/small/music-man-gamer-line-pop-art-potrait-logo-colorful-design-with-dark-background-abstract-illustration-isolated-black-background-for-t-shirt-poster-clothing-merch-apparel-badge-design-vector.jpg"
-          />
-        </a>
-
-        <a href="player16">
-          <img
-            id="but1"
-            src="https://static.vecteezy.com/system/resources/thumbnails/008/777/617/small/music-man-gamer-line-pop-art-potrait-logo-colorful-design-with-dark-background-abstract-illustration-isolated-black-background-for-t-shirt-poster-clothing-merch-apparel-badge-design-vector.jpg"
-          />
-        </a>
-
-        <a href="player17">
-          <img
-            id="but1"
-            src="https://static.vecteezy.com/system/resources/thumbnails/008/777/617/small/music-man-gamer-line-pop-art-potrait-logo-colorful-design-with-dark-background-abstract-illustration-isolated-black-background-for-t-shirt-poster-clothing-merch-apparel-badge-design-vector.jpg"
-          />
-        </a>
-
-        <a href="player18">
-          <img
-            id="but1"
-            src="https://static.vecteezy.com/system/resources/thumbnails/008/777/617/small/music-man-gamer-line-pop-art-potrait-logo-colorful-design-with-dark-background-abstract-illustration-isolated-black-background-for-t-shirt-poster-clothing-merch-apparel-badge-design-vector.jpg"
-          />
-        </a>
-
-        <a href="player19">
-          <img
-            id="but1"
-            src="https://static.vecteezy.com/system/resources/thumbnails/008/777/617/small/music-man-gamer-line-pop-art-potrait-logo-colorful-design-with-dark-background-abstract-illustration-isolated-black-background-for-t-shirt-poster-clothing-merch-apparel-badge-design-vector.jpg"
-          />
-        </a>
-
-        <a href="player20">
-          <img
-            id="but1"
-            src="https://static.vecteezy.com/system/resources/thumbnails/008/777/617/small/music-man-gamer-line-pop-art-potrait-logo-colorful-design-with-dark-background-abstract-illustration-isolated-black-background-for-t-shirt-poster-clothing-merch-apparel-badge-design-vector.jpg"
-          />
-        </a>
-
-        <a href="player21">
-          <img
-            id="but1"
-            src="https://static.vecteezy.com/system/resources/thumbnails/008/777/617/small/music-man-gamer-line-pop-art-potrait-logo-colorful-design-with-dark-background-abstract-illustration-isolated-black-background-for-t-shirt-poster-clothing-merch-apparel-badge-design-vector.jpg"
-          />
-        </a>
-
-        <a href="player22">
-          <img
-            id="but1"
-            src="https://static.vecteezy.com/system/resources/thumbnails/008/777/617/small/music-man-gamer-line-pop-art-potrait-logo-colorful-design-with-dark-background-abstract-illustration-isolated-black-background-for-t-shirt-poster-clothing-merch-apparel-badge-design-vector.jpg"
-          />
-        </a>
-
-        <a href="player23">
-          <img
-            id="but1"
-            src="https://static.vecteezy.com/system/resources/thumbnails/008/777/617/small/music-man-gamer-line-pop-art-potrait-logo-colorful-design-with-dark-background-abstract-illustration-isolated-black-background-for-t-shirt-poster-clothing-merch-apparel-badge-design-vector.jpg"
-          />
-        </a>
-
-        <a href="player24">
-          <img
-            id="but1"
-            src="https://static.vecteezy.com/system/resources/thumbnails/008/777/617/small/music-man-gamer-line-pop-art-potrait-logo-colorful-design-with-dark-background-abstract-illustration-isolated-black-background-for-t-shirt-poster-clothing-merch-apparel-badge-design-vector.jpg"
-          />
-        </a>
-
-        <a href="player25">
-          <img
-            id="but1"
-            src="https://static.vecteezy.com/system/resources/thumbnails/008/777/617/small/music-man-gamer-line-pop-art-potrait-logo-colorful-design-with-dark-background-abstract-illustration-isolated-black-background-for-t-shirt-poster-clothing-merch-apparel-badge-design-vector.jpg"
-          />
-        </a>
-
-        <a href="player26">
-          <img
-            id="but1"
-            src="https://static.vecteezy.com/system/resources/thumbnails/008/777/617/small/music-man-gamer-line-pop-art-potrait-logo-colorful-design-with-dark-background-abstract-illustration-isolated-black-background-for-t-shirt-poster-clothing-merch-apparel-badge-design-vector.jpg"
-          />
-        </a>
-        <a href="player27">
-          <img
-            id="but1"
-            src="https://static.vecteezy.com/system/resources/thumbnails/008/777/617/small/music-man-gamer-line-pop-art-potrait-logo-colorful-design-with-dark-background-abstract-illustration-isolated-black-background-for-t-shirt-poster-clothing-merch-apparel-badge-design-vector.jpg"
-          />
-        </a>
-
-        <a href="player28">
-          <img
-            id="but1"
-            src="https://static.vecteezy.com/system/resources/thumbnails/008/777/617/small/music-man-gamer-line-pop-art-potrait-logo-colorful-design-with-dark-background-abstract-illustration-isolated-black-background-for-t-shirt-poster-clothing-merch-apparel-badge-design-vector.jpg"
-          />
-        </a>
-
-        <a href="player29">
-          <img
-            id="but1"
-            src="https://static.vecteezy.com/system/resources/thumbnails/008/777/617/small/music-man-gamer-line-pop-art-potrait-logo-colorful-design-with-dark-background-abstract-illustration-isolated-black-background-for-t-shirt-poster-clothing-merch-apparel-badge-design-vector.jpg"
-          />
-        </a>
-
-        <a href="player30">
-          <img
-            id="but1"
-            src="https://static.vecteezy.com/system/resources/thumbnails/008/777/617/small/music-man-gamer-line-pop-art-potrait-logo-colorful-design-with-dark-background-abstract-illustration-isolated-black-background-for-t-shirt-poster-clothing-merch-apparel-badge-design-vector.jpg"
-          />
-        </a>
-      </h1>
+       {/* <div>{useEffect(()=>{console.log("I Only run once (When the component gets mounted)") },[])}</div> */}
+           
+           <div>{buttons()}</div>  
+           </h1>
     </div>
-  );
-};
 
+  );
+
+}
 export default Songs;

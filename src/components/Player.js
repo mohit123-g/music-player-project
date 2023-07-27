@@ -4,13 +4,17 @@ import { AiFillPlayCircle, AiFillPauseCircle } from "react-icons/ai";
 import { BiSkipNext, BiSkipPrevious } from "react-icons/bi";
 import { IconContext } from "react-icons";
 import "../styles.css";
+import { useParams } from "react-router-dom";
 function Player(props) {  
-    var [i,setI]=useState(props.index);
+    var [i,setI]=useState( useParams()['id']);
+   
   const [isPlaying, setIsPlaying] = useState(false);
   const [time, setTime] = useState({
     min: "",
     sec: ""
   });
+  ;
+  // setI(index)
   const [currTime, setCurrTime] = useState({
     min: "",
     sec: ""
@@ -63,7 +67,7 @@ function Player(props) {
   return (
     <div className="component">
       <h2>Playing Now</h2>
-      <img className="musicCover" src="https://picsum.photos/200/200" />
+      <img className="musicCover" src={props.song[i].img} />
       <div>
         <h3 className="title">{props.song[i].name}</h3>
              {console.log(props.index)}
@@ -95,6 +99,7 @@ function Player(props) {
           if(i>=0)
          { pause()
           setI(i--)
+          // index--
           setIsPlaying(false);}
           else
           {alert("No previous song")}
@@ -120,11 +125,12 @@ function Player(props) {
       if(i<props.song.length)
       { pause()
        setI(i++)
+      // index++
        setIsPlaying(false);}
        else
        {alert("No Next Song")}
         }}>
-                    {console.log(i)}
+                    {/* {console.log(i)} */}
           <IconContext.Provider value={{ size: "3em", color: "#27AE60" }}>
             <BiSkipNext />
           </IconContext.Provider>

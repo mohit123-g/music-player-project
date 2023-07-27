@@ -12,7 +12,14 @@
   border-radius: 10px;
 }
 
+.App{
+  background-image: url("https://techcrunch.com/wp-content/uploads/2021/03/Spotify-Mix-Image-2.jpg?w=1024");
+  /* background-position: center; */
 
+   /* background-size: cover; */
+  
+
+}
 
 #but1{
 
@@ -28,4 +35,5 @@ body {
   
 }
 
+#title{color: aquamarine;}
 
